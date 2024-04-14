@@ -82,11 +82,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
       {selectedImage && (
         <div className="preview">
           <p>Selected image:</p>
-          <img
-            src={URL.createObjectURL(selectedImage)}
-            alt="Preview"
-            className="img-thumbnail"
-          />
+          <div className="d-flex justify-content-center mt-3">
+            <img
+              src={URL.createObjectURL(selectedImage)}
+              alt="Preview"
+              className="img-thumbnail"
+            />
+          </div>
         </div>
       )}
     </div>
