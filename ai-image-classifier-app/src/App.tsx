@@ -1,9 +1,15 @@
-import ListGroup from "./components/ListGroup"
+import React from "react";
+import ImageUpload from "./components/ImageUpload";
+import ClassificationResult from "./components/ClassificationResult";
 
-function App() {
-  return <div>
-    <ListGroup />
-  </div>
-}
+const App: React.FC = () => {
+  return (
+    <div>
+      <ImageUpload />
+      {/* Once an image is uploaded and classified, display the results*/}
+      {/* <ClassificationResult imageUrl={imageUrl} label={label} confidence={confidence}/> */}
+    </div>
+  );
+};
 
-export default App
+export default App;
