@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 
-const ImageUpload: React.FC = () => {
+interface ImageUploadProps {
+  onUpload: (data: {
+    imageUrl: string;
+    predictedLabel: string;
+    predictionConfidence: number;
+  }) => void;
+}
+
+const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +47,14 @@ const ImageUpload: React.FC = () => {
 
       // Log mock response data to make sure it looks as we expect
       console.log("Mock response:", mockResponse);
+
+      // Propogate classification data to app component so it can be passed to
+      // the classification result component
+      onUpload({
+        imageUrl: URL.createObjectURL(selectedImage),
+        predictedLabel: predictedLabel,
+        predictionConfidence: predictedConfidence,
+      });
     }
   };
 

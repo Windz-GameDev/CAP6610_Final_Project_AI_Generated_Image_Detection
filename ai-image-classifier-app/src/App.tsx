@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import ImageUpload from "./components/ImageUpload";
 import ClassificationResult from "./components/ClassificationResult";
 
 const App: React.FC = () => {
+  const [classificationData, setClassificationData] = useState<{
+    imageUrl: string;
+    predictedLabel: string;
+    predictionConfidence: number;
+  } | null>(null);
+
   return (
     <div>
-      <ImageUpload />
-      {/* Once an image is uploaded and classified, display the results*/}
-      {/* <ClassificationResult imageUrl={imageUrl} label={label} confidence={confidence}/> */}
+      <ImageUpload onUpload={setClassificationData} />
+      {classificationData && (
+        <ClassificationResult
+          imageUrl={classificationData.imageUrl}
+          predictedLabel={classificationData.predictedLabel}
+          predictionConfidence={classificationData.predictionConfidence}
+        />
+      )}
     </div>
   );
 };
