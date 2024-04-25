@@ -29,7 +29,7 @@ const ClassificationResult: React.FC<ClassificationResultProps> = ({
         Image preview is displayed at the top of the card.
         The src attribute is set to the imageUrl prop, while "Classified Image"
         is displayed as alternative text for accessability. 
-
+        The card body contains the card title and text.
         */}
       <img src={imageUrl} className="card-img-top" alt="Classified Image" />
       <div className="card-body">

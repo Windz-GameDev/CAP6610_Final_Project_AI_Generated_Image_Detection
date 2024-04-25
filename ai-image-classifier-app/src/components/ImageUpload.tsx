@@ -123,7 +123,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
       {/*
         If an image is selected, then preview it. Label and a div 
         containing the formatting for the image are grouped together
-        in a preview div. 
+        in a preview div for potential further future styling. 
       */}
       {selectedImage && (
         <div className="preview">

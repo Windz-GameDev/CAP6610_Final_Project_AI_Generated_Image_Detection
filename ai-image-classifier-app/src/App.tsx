@@ -7,6 +7,10 @@ import ImageUpload from "./components/ImageUpload";
 // Import the ClassificationResult component for neatly displaying the classification results
 import ClassificationResult from "./components/ClassificationResult";
 
+// Import to use Font Awesome Brain Icon next to title
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBrain } from "@fortawesome/free-solid-svg-icons";
+
 // Define the App component as a functional component
 const App: React.FC = () => {
   // We use the useState hook to create the classificationData state variable
@@ -27,7 +31,7 @@ const App: React.FC = () => {
   return (
     <div className="container my-5">
       <h1 className="text-center text-primary mb-4">
-        AI Image Classification App
+        AI Image Classification App <FontAwesomeIcon icon={faBrain} />
       </h1>
       <div>
         {/*
