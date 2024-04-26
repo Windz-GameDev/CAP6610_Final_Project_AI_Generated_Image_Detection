@@ -1,6 +1,7 @@
 // Import React object for using JSX and useState hook for adding state to functional components
 import React, { useState } from "react";
-// import axios from "axios";
+import axios, { AxiosError } from "axios";
+import Modal from "react-bootstrap/Modal";
 
 // Declare an interface named ImageUploadProps
 // This allows us to define a contract for a certain structure of an object.
@@ -34,6 +35,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
   // of either type null or a file object depending on whether an image has been uploaded.
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
+  // State for managing error popup visibility
+  // showErrorPopup is a boolean value initially set to false.
+  // It will be set to true in the handleUpload function
+  // when an upload to the server fails.
+  const [showErrorPopup, setShowErrorPopup] = useState<boolean>(false);
+
   // Event handler designed to respond to changes in the file input element within
   // the ImageUpload component. The parameter represents the event object
   // eventually passed to the event handler by react
@@ -52,72 +59,87 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
     }
   };
 
-  /*
-  //I'll comment this later.
+  // Define async function to call API with the selected image in state
   async function call_api(selected_image: File) {
-    var body = new FormData();
-    body.append("image", selected_image);
+    // Create a FormData object to hold our image file
+    var formData = new FormData();
 
+    // Append the selected image file to the FormData object with the key "image"
+    formData.append("image", selected_image);
+
+    // Define URL of the ML server which will process the image upload
     const server = "http://localhost:8080/api/output";
-    let send = await axios.post(server, URL.createObjectURL(selected_image));
-    console.log(send.data);
 
-    let response = await axios.get(server);
-    console.log(response.data.output);
+    // Kris, slightly modified your code to only make one server connection request
+    // Use axios to send a POST request to the defined server with the FormData object as the body
+    // This will send the image file for processing and get the classification
+    // result when processing is completed
 
-    return response.data.output;
-  }*/
+    try {
+      let serverResponse = await axios.post(server, formData);
+
+      // Log response data (JSON object) from server for debugging purposes
+      console.log(serverResponse.data);
+
+      //  Return the extracted output array stored in the JSON object response from the server
+      return serverResponse.data.output;
+    } catch (error) {
+      // Use type guard to check if error is an AxiosError object
+      // This check is added to avoid TypeScript warnings
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 400) {
+          // Log error message returned from server to the console
+          console.error("Error:", error.response.data.error);
+        } else {
+          // Handle other unexpected errors and print them to the console
+          console.error("An unexpected error occured:", error);
+        }
+      }
+
+      return null;
+    }
+  }
 
   // Upload Image to BackEnd for processing
   const handleUpload = async () => {
     // First make sure an image has been uploaded by the user.
     // Note: This function never should have been called if selectedImage is null.
     if (selectedImage) {
-      // For now, perform mock processing until backend is implemented
-      // Print to console noting selected image is being sent to backend and
-      // processing has begun.
+      // Log name of image to be processed
       console.log("Uploading image", selectedImage.name);
 
-      // Randomly choose between "AI Generated" and "Real Photo" to mimick prediction
-      const labels = ["AI Generated", "Real Photo"];
+      // Get API response in the form of an array. We assign the result here,
+      // and use that result later and call 'await', all to force the program to wait
+      // for an output to produce (so that it doesn't show an empty prediction)
+      let result = await call_api(selectedImage);
 
-      // Math.random returns a number in the range [0, 1)
-      // Multiplying this number by the length of the labels array
-      // gives a floating point number between [0, length of labels array - 1]
-      // taking the floor of this number gives a valid index representing our random choice.
-      const predictedLabel = labels[Math.floor(Math.random() * labels.length)];
+      // Image failed to be transmitted to the server
+      if (result === null) {
+        console.error("Upload failed");
+        setShowErrorPopup(true); // Show the error popup
+        console.log(showErrorPopup);
+        return null;
+      }
 
-      // Generate a random confidence score between 0 and 100
-      // Same logic but multiplying by 101 gives a value between 0 and (101 - 1), both inclusive.
-      const predictedConfidence = Math.floor(Math.random() * 101);
+      const predictedLabel = result[0];
 
-      /*
-        // get API response in the form of an array. We assign the result here,
-        // and use that result later and call 'await', all to force the program to wait
-        // for an output to produce (so that it doesn't show an empty prediction)
-        let result = await call_api(selectedImage);
+      const predictedConfidence = result[1];
 
-        const predictedLabel = result[0];
-
-
-        const predictedConfidence = result[1];
-      */
-
-      // Store our random mock response data in an object
+      // Store our response data in an object
       // We store the image data in the same format as the object argument
       // expected by the onUpload function of the app component.
-      const mockResponse = {
+      const response = {
         imageUrl: URL.createObjectURL(selectedImage),
         predictedLabel: predictedLabel,
         predictionConfidence: predictedConfidence,
       };
 
-      // Log mock response data to make sure it looks as we expect
-      console.log("Mock response:", mockResponse);
+      // Log response data to make sure it looks as we expect
+      console.log("Response:", response);
 
       // Propogate classification data to app component so it can be passed to
       // the classification result component
-      onUpload(mockResponse);
+      onUpload(response);
     }
   };
 
@@ -142,6 +164,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
           onChange={handleImageChange} // Image changes are handled by the handleImageChange function
         />
         <button
+          type="button"
           className="btn btn-primary mt-2"
           onClick={handleUpload} // To begin the upload classification process, the handleUpload function is called
           disabled={!selectedImage} // If selected image is null, disable upload button
@@ -167,6 +190,27 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
           />
         </div>
       )}
+      {/* 
+      React-Bootstrap modal for Error Popup 
+      It will display when an upload fails.
+      It will be disabled when user clicks out of the modal, 
+      or either of the two close buttons.
+      */}
+      <Modal show={showErrorPopup} onHide={() => setShowErrorPopup(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Error</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Image upload failed. Please try again.</Modal.Body>
+        <Modal.Footer>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => setShowErrorPopup(false)}
+          >
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
