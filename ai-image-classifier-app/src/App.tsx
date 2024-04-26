@@ -10,6 +10,7 @@ import ClassificationResult from "./components/ClassificationResult";
 // Import to use Font Awesome Brain Icon next to title
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBrain } from "@fortawesome/free-solid-svg-icons";
+import Banner from "./components/Banner";
 
 // Define the App component as a functional component
 const App: React.FC = () => {
@@ -33,6 +34,7 @@ const App: React.FC = () => {
       <h1 className="text-center text-primary mb-4">
         AI Image Classification App <FontAwesomeIcon icon={faBrain} />
       </h1>
+      <Banner slogan="Detect AI using AI" />
       <div>
         {/*
           The ImageUpload component is rendered with its onUpload prop set to 

@@ -24,21 +24,33 @@ const ClassificationResult: React.FC<ClassificationResultProps> = ({
   // The component returns JSX representing the UI for displaying the classification card.
   // The card contains a smaller image preview, the predicted label from the model, and it's confidence score.
   return (
-    <div className="card" style={{ width: "18rem" }}>
-      {/*
+    <div className="d-flex flex-column align-items-center">
+      <p>Result:</p>
+      <div className="card">
+        {/*
         Image preview is displayed at the top of the card.
         The src attribute is set to the imageUrl prop, while "Classified Image"
         is displayed as alternative text for accessability. 
         The card body contains the card title and text.
         */}
-      <img src={imageUrl} className="card-img-top" alt="Classified Image" />
-      <div className="card-body">
-        {/*
+
+        <img
+          src={imageUrl}
+          className="card-img-top"
+          alt="Classified Image"
+          style={{
+            maxWidth: "500px",
+            maxHeight: "500px",
+          }}
+        />
+        <div className="card-body">
+          {/*
           Predicted label is displayed for the card title while the confidence score is displayed
           as the text of the card.
         */}
-        <h5 className="card-title">Classification: {predictedLabel}</h5>
-        <p className="card-text">Confidence: {predictionConfidence}</p>
+          <h5 className="card-title">Classification: {predictedLabel}</h5>
+          <p className="card-text">Confidence: {predictionConfidence}</p>
+        </div>
       </div>
     </div>
   );

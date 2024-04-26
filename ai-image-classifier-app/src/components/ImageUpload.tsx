@@ -121,20 +121,21 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
         </button>
       </div>
       {/*
-        If an image is selected, then preview it. Label and a div 
-        containing the formatting for the image are grouped together
-        in a preview div for potential further future styling. 
+        If an image is selected, then preview it.
       */}
       {selectedImage && (
-        <div className="preview">
-          <p>Selected image:</p>
-          <div className="d-flex justify-content-center mt-3">
-            <img
-              src={URL.createObjectURL(selectedImage)}
-              alt="Preview"
-              className="img-thumbnail"
-            />
-          </div>
+        <div className="d-flex flex-column align-items-center preview justify-content-center">
+          <p>Image Preview:</p>
+          <img
+            src={URL.createObjectURL(selectedImage)}
+            alt="Preview"
+            className="img-thumbnail mt-3"
+            style={{
+              maxWidth: "500px",
+              maxHeight: "500px",
+              objectFit: "contain",
+            }}
+          />
         </div>
       )}
     </div>
