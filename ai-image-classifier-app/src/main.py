@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 from PIL import Image
-from io import BytesIO
 import random
 
 # Instantiate app
@@ -34,7 +33,6 @@ def get_image():
     else:
         # Return an error if no file is uploaded with 400 status code to signify bad request to front end
         return jsonify({"error": "No image file was included in the request"}), 400
-
 
     # Get the prediction result
     # This is temporarily just mocking the prediction
