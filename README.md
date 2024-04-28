@@ -2,7 +2,7 @@
 
 ## Overview
 
-The AI Image Classifier App is a web application designed to classify images uploaded by users. It leverages machine learning to analyze images and predict whether they are AI-generated or real photos. The application is built using React for the frontend, TypeScript for type-safe code, Vite for bundling and serving the application, and Python for the machine learning model implementation.
+The AI Image Classifier App is a web application designed to classify images uploaded by users. It leverages machine learning to analyze images and predict whether they are AI-generated or real photos. The application is built using React for the front end, TypeScript for type-safe code, Vite for bundling and serving the application, and Python for the machine-learning model implementation.
 
 ## Technologies Used
 
@@ -35,14 +35,14 @@ The AI Image Classifier App is a web application designed to classify images upl
 ### Running the Application
 
 1. Start the backend server by running `python src/main.py` in the project root directory.
-2. Start the frontend server by running `npm run dev` in the project root directory.
+2. Start the frontend server by running `npm run dev` in the `ai-image-classifier-app` folder.
 3. Open your web browser and navigate to `http://localhost:5173/` to access the application.
 
 ## Usage
 
 1. **Upload an Image**: Click on the "Upload Image" button and select an image file from your computer.
 2. **Classify the Image**: Click on the "Upload" button to send the image to the server for classification.
-3. **View the Result**: Once the image is classified, the application will display the classification result, including whether the image is AI-generated or a real photo, and the confidence score.
+3. **View the Result**: Once the image is classified, the application will display the classification result, including whether the image is AI-generated or a real photo and the confidence score.
 
 ## Contributing
 
