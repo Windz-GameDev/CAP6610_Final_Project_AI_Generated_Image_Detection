@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 from PIL import Image
+from resnet import resnet50
 import random
 
 # Instantiate app
@@ -21,6 +22,45 @@ def mock_predict_image():
 
     return predicted_label, prediction_confidence
 
+def predImage(filNam):
+    
+    labels = ["AI Generated", "Real Photo"]
+    
+    model = resnet50(num_classes=1)
+    
+    state_dict = torch.load("./model_epoch_best.pth", map_location='cpu')
+    
+    model.load_state_dict(state_dict['model'])
+    
+    model.eval()
+    
+    # Transform
+    trans_init = []
+    
+    trans = transforms.Compose(trans_init + [
+    
+        transforms.ToTensor(),
+        
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        
+    ])
+
+    img = trans(Image.open(img).convert('RGB'))
+
+    with torch.no_grad():
+        in_tens = img.unsqueeze(0)
+        prob = model(in_tens).sigmoid().item()
+    
+    if prob < .5: 
+        
+        return label[1], (1 - prob) * 100
+        
+    else: 
+        
+        return label[0], prob * 100
+        
+    
+
 @app.route("/api/output", methods=["POST"])
 @cross_origin()
 def get_image():
@@ -36,7 +76,7 @@ def get_image():
 
     # Get the prediction result
     # This is temporarily just mocking the prediction
-    predicted_label, prediction_confidence = mock_predict_image()
+    predicted_label, prediction_confidence = predImage(image_file)
     
     # Return the JSON response containing the prediction result
     # The output list contains the predicted label and prediction confidence.
