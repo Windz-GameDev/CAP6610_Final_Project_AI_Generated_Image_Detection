@@ -49,6 +49,10 @@ The AI Image Classifier App is a web application designed to classify images upl
 
 Contributions are welcome! If you find bugs or have suggestions for improvements, please feel free to submit a pull request or open an issue.
 
+## Acknowledgments
+
+The AI model was trained using framework [CNNDetection](https://github.com/peterwang512/CNNDetection) along with borrowing their implementation of ResNet-50, with this [dataset](https://universe.roboflow.com/itml-project/itml-final-project-ai-versus-non-ai-dataset/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true) as ResNet-50 fine-tuning data. 
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
