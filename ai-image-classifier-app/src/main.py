@@ -8,7 +8,7 @@ import random
 app = Flask(__name__)
 cors = CORS(app,  resources={r"/*": {"origins": "*"}})
 
-
+# Mock prediction function for debugging API
 def mock_predict_image():
 
     # Define possible labels
@@ -75,7 +75,6 @@ def get_image():
         return jsonify({"error": "No image file was included in the request"}), 400
 
     # Get the prediction result
-    # This is temporarily just mocking the prediction
     predicted_label, prediction_confidence = predImage(image_file)
     
     # Return the JSON response containing the prediction result

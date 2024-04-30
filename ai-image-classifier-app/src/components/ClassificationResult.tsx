@@ -49,7 +49,9 @@ const ClassificationResult: React.FC<ClassificationResultProps> = ({
           as the text of the card.
         */}
           <h5 className="card-title">Classification: {predictedLabel}</h5>
-          <p className="card-text">Confidence: {predictionConfidence}%</p>
+          <p className="card-text">
+            Confidence: {predictionConfidence.toFixed(2)}%
+          </p>
         </div>
       </div>
     </div>

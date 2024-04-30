@@ -1,16 +1,16 @@
 .banner {
     background-image: url('../assets/banner.jpg'); 
-    background-size: cover; /* Ensures the image covers the entire banner */
-    background-position: center; /* Centers the image */
-    height: 200px; /* Adjust based on your needs */
+    background-size: cover; /* Ensure the image covers the entire banner */
+    background-position: center; /* Center the image */
+    height: 200px; /* Height of the banner */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #fff; /* Ensures the text is white for better contrast */
+    color: #fff; /* Ensure the text is white for better contrast */
     font-size: 3em; /* Increase the font size for impact */
-    font-weight: bold; /* Makes the text bolder */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds a shadow for depth */
+    font-weight: bold; /* Make the text bolder */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a shadow for depth */
    }
    
    @keyframes fadeIn {
