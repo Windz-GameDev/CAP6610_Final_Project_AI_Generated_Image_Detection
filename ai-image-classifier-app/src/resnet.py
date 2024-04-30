@@ -1,3 +1,15 @@
+"""
+This file has been borrowed from https://github.com/PeterWang512/CNNDetection/tree/master
+
+@inproceedings{wang2019cnngenerated,
+  title={CNN-generated images are surprisingly easy to spot...for now},
+  author={Wang, Sheng-Yu and Wang, Oliver and Zhang, Richard and Owens, Andrew and Efros, Alexei A},
+  booktitle={CVPR},
+  year={2020}
+}
+
+"""
+
 import torch.nn as nn
 import torch.utils.model_zoo as model_zoo
 
