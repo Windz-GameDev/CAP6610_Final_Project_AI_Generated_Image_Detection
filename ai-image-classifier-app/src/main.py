@@ -23,6 +23,18 @@ def mock_predict_image():
     return predicted_label, prediction_confidence
 
 def predImage(filNam):
+
+    """
+    This function has been inspired by the implementation from https://github.com/PeterWang512/CNNDetection/tree/master
+    
+    @inproceedings{wang2019cnngenerated,
+      title={CNN-generated images are surprisingly easy to spot...for now},
+      author={Wang, Sheng-Yu and Wang, Oliver and Zhang, Richard and Owens, Andrew and Efros, Alexei A},
+      booktitle={CVPR},
+      year={2020}
+    }
+    
+    """
     
     labels = ["AI Generated", "Real Photo"]
     
