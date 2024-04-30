@@ -53,6 +53,9 @@ Contributions are welcome! If you find bugs or have suggestions for improvements
 
 The AI model was trained using framework [CNNDetection](https://github.com/peterwang512/CNNDetection) along with borrowing their implementation of ResNet-50, with this [dataset](https://universe.roboflow.com/itml-project/itml-final-project-ai-versus-non-ai-dataset/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true) as ResNet-50 fine-tuning data. 
 
+https://www.phind.com/, an AI search engine, was used to help write some of the custom CSS of the application.
+
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
