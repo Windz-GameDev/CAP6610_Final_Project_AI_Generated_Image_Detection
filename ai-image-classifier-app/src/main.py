@@ -3,12 +3,14 @@ from flask_cors import CORS, cross_origin
 from PIL import Image
 from resnet import resnet50
 import random
+import torch
+from torchvision import transforms
 
 # Instantiate app
 app = Flask(__name__)
 cors = CORS(app,  resources={r"/*": {"origins": "*"}})
 
-# Mock prediction function for debugging API
+
 def mock_predict_image():
 
     # Define possible labels
@@ -23,18 +25,6 @@ def mock_predict_image():
     return predicted_label, prediction_confidence
 
 def predImage(filNam):
-
-    """
-    This function has been inspired by the implementation from https://github.com/PeterWang512/CNNDetection/tree/master
-    
-    @inproceedings{wang2019cnngenerated,
-      title={CNN-generated images are surprisingly easy to spot...for now},
-      author={Wang, Sheng-Yu and Wang, Oliver and Zhang, Richard and Owens, Andrew and Efros, Alexei A},
-      booktitle={CVPR},
-      year={2020}
-    }
-    
-    """
     
     labels = ["AI Generated", "Real Photo"]
     
@@ -57,7 +47,7 @@ def predImage(filNam):
         
     ])
 
-    img = trans(Image.open(img).convert('RGB'))
+    img = trans(Image.open(filNam).convert('RGB'))
 
     with torch.no_grad():
         in_tens = img.unsqueeze(0)
@@ -65,11 +55,11 @@ def predImage(filNam):
     
     if prob < .5: 
         
-        return label[1], (1 - prob) * 100
+        return labels[0], (1 - prob) * 100
         
     else: 
         
-        return label[0], prob * 100
+        return labels[1], prob * 100
         
     
 
@@ -87,6 +77,7 @@ def get_image():
         return jsonify({"error": "No image file was included in the request"}), 400
 
     # Get the prediction result
+    # This is temporarily just mocking the prediction
     predicted_label, prediction_confidence = predImage(image_file)
     
     # Return the JSON response containing the prediction result
