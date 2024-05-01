@@ -35,7 +35,7 @@ The AI Image Classifier App is a web application designed to classify images upl
 
 ### Running the Application
 
-1. Start the backend server by running navigating to the `src` directory and running `python main.py`. Make sure all installation steps have been completed, or you will encounter issues. Note: If you try to run it while your terminal is in a different directory, the server may crash.
+1. Start the backend server by navigating to the `src` directory and running `python main.py`. Make sure all installation steps have been completed, or you will encounter issues. Note: If you try to run it while your terminal is in a different directory, the server may crash when uploading an image from the front end.
 2. Start the frontend server by running `npm run dev` in the `ai-image-classifier-app` folder.
    - Note: The backend should be run before the frontend because the latter requires it to function properly.
 3. Open your web browser and navigate to `http://localhost:5173/` to access the application.
