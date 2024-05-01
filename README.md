@@ -31,7 +31,7 @@ The AI Image Classifier App is a web application designed to classify images upl
 2. Navigate to the project directory and then the `ai-image-classifier-app` folder.
 3. Install the frontend dependencies by running `npm install` in the project root directory.
 4. Install the backend dependencies by running `pip install -r requirements.txt` in the `src` directory.
-5. Download model from [model](https://huggingface.co/AaronStudent/CAP6610_Final_Project_Model_AI_Image_Classifier/resolve/main/model_epoch_best.pth?download=true) and place it in the `src` directory.
+5. Download our model from [HuggingFace](https://huggingface.co/AaronStudent/CAP6610_Final_Project_Model_AI_Image_Classifier/resolve/main/model_epoch_best.pth?download=true) and place it in the `src` directory.
 
 ### Running the Application
 
