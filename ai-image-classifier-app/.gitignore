@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+ai-image-classifier-app/src/model_epoch_best.pth
+model_epoch_best.pth
 
 # Editor directories and files
 .vscode/*
