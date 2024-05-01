@@ -35,10 +35,10 @@ The AI Image Classifier App is a web application designed to classify images upl
 
 ### Running the Application
 
-1. Start the backend server by running `python src/main.py` in the project root directory. Make sure all installation steps have been completed, or you will encounter issues.
+1. Start the backend server by running navigating to the `src` directory and running `python main.py`. Make sure all installation steps have been completed, or you will encounter issues.
 2. Start the frontend server by running `npm run dev` in the `ai-image-classifier-app` folder.
    - Note: The backend should be run before the frontend because the latter requires it to function properly.
-4. Open your web browser and navigate to `http://localhost:5173/` to access the application.
+3. Open your web browser and navigate to `http://localhost:5173/` to access the application.
 
 ## Usage
 
@@ -52,10 +52,9 @@ Contributions are welcome! If you find bugs or have suggestions for improvements
 
 ## Acknowledgments
 
-The AI model was trained using framework [CNNDetection](https://github.com/peterwang512/CNNDetection) along with borrowing their implementation of ResNet-50, with this [dataset](https://universe.roboflow.com/itml-project/itml-final-project-ai-versus-non-ai-dataset/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true) as ResNet-50 fine-tuning data. 
+The AI model was trained using framework [CNNDetection](https://github.com/peterwang512/CNNDetection) along with borrowing their implementation of ResNet-50, with this [dataset](https://universe.roboflow.com/itml-project/itml-final-project-ai-versus-non-ai-dataset/browse?queryText=&pageSize=50&startingIndex=0&browseQuery=true) as ResNet-50 fine-tuning data.
 
 https://www.phind.com/, an AI search engine, was used to help write some of the custom CSS of the application.
-
 
 ## License
 
